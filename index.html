@@ -63,7 +63,8 @@
 
           shellSdk.onViewState('activityId', async activityId => {
               const activity = await getActivity(cloudHost, account, company, activityId);
-              updateUI(activity ? '${activity.code}' : 'NO ACTIVITY CODE');
+              //updateUI(activity ? '${activity.code}' : 'NO ACTIVITY CODE');
+              console.log('xxx' + activity + 'xxx');
           });
         });
       }
