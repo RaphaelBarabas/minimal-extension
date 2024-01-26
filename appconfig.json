@@ -1,0 +1,6 @@
+{
+  "name": "Minimal Requirements Extension",
+  "description": "This is a minimal extension with only the required fields in the appconfig.json file.",
+  "version": "0.1.0",
+  "provider": "SAP"
+}
