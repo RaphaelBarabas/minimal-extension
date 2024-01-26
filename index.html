@@ -61,6 +61,12 @@
 
           console.log('Hello from the minimal extension!');
         });
+
+        shellSdk.onViewState('activityId', async activityId => {
+            displayMessage (`Loading for activity ${activityId}...`);
+            // use the public API from SAP Field Service Management to retrieve the activity detail object based on the id value 
+        });
+
       }
     </script>
   </body>
