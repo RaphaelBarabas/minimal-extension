@@ -7,7 +7,7 @@
   <body>
     <div>
       <h1>Activity id</h1>
-      <h2 id="info">'loading ...'</h2>
+      <h2 id="info">loading ...</h2>
     </div>
     <script src="https://unpkg.com/fsm-shell"></script>
     <script src="helpers.js"></script>
@@ -47,7 +47,7 @@
 
           initializeRefreshTokenStrategy(shellSdk, SHELL_EVENTS);
 
-          const activity = await getActivity(cloudHost, account, company, '3F5BD90C305C4B70ABCD106F0C0357CA');
+          const activity = getActivity(cloudHost, account, company, '3F5BD90C305C4B70ABCD106F0C0357CA');
 
           updateUI(`Activity: ${activity.id}`);
 
