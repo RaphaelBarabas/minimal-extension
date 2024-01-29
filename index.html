@@ -10,6 +10,7 @@
       <h2 id="info">'loading ...'</h2>
     </div>
     <script src="https://unpkg.com/fsm-shell"></script>
+    <script src="helpers.js"></script>
     <script>
       const updateUI = (text) =>
         (document.querySelectorAll('#info')[0].innerText = text);
@@ -42,28 +43,13 @@
             auth
           } = JSON.parse(event);
           
-          updateUI(`Hi ${cloudHost} / ${user} / ${account} / ${company}!`);
-          updateUI(`${activityID}`);
-          console.log('ActivityID: ', activityID);
+          //updateUI(`${cloudHost} / ${user} / ${account} / ${company}!`);
 
           initializeRefreshTokenStrategy(shellSdk, auth);
 
-          const headers = {
-            'Content-Type': 'application/json',
-            'X-Client-ID': 'fsm-extension-sample',
-            'X-Client-Version': '1.0.0',
-            'Authorization': `bearer ${sessionStorage.getItem('token')}`
-          };
+          const activity = getActivity(cloudHost, account, company, '3F5BD90C305C4B70ABCD106F0C0357CA')
 
-          const activity = new Promise(resolve => {
-          fetch(`https://${cloudHost}/api/data/v4/Activity/${activityID}?dtos=Activity.42&account=${account}&company=${company}`, {
-            headers
-            })
-            .then(response => response.json())
-            .then(function(json) {
-              resolve(json.data[0].activity);
-            });
-          });
+          updateUI(`Activity: ${activity.id}`);
 
         });
       } catch (e) {
