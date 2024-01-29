@@ -2,74 +2,47 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Minimal Requirements Extension</title>
-    <link href="https://unpkg.com/fundamental-styles" rel="stylesheet">
+    <title>Require context</title>
   </head>
   <body>
     <div>
-      <h2 class="fd-title fd-title--h2">Minimal Requirements Extension</h2>
+      <h1>Require context</h1>
+      <h2 id="info">'loading ...'</h2>
     </div>
-    <br/><br/>
-    <div>
-      <h4 class="fd-title fd-title--h4">This is an example of a minimal extension with only the required field in the appconfig.</h2>
-    </div>
-    <br/><br/>
     <script src="https://unpkg.com/fsm-shell"></script>
-    <script src="helpers.js"></script>
     <script>
-      // Import ShellSDK and events list from FSMShell global variable
-      // see https://github.com/SAP/fsm-shell for more details.
-      const { ShellSdk, SHELL_EVENTS } = FSMShell;
-
-      // print stuff on screen
       const updateUI = (text) =>
         (document.querySelectorAll('#info')[0].innerText = text);
 
-      // Display an error message if extension does not run within shell
-      if (!ShellSdk.isInsideShell()) {
-        console.log('Unable to reach shell eventAPI');
-      } else {
-        // Initialise ShellSDK to connect with parent shell library
+      try {
+        const { ShellSdk, SHELL_EVENTS } = FSMShell;
+        console.log('using ShellSdk version', ShellSdk.VERSION);
+
+        if (!ShellSdk.isInsideShell()) {
+          throw new Error('unable to reach shell eventAPI');
+        }
+
         const shellSdk = ShellSdk.init(parent, '*');
 
-        // Initialise the extension by requesting the fsm context
+        // get context
         shellSdk.emit(SHELL_EVENTS.Version1.REQUIRE_CONTEXT, {
-          clientIdentifier: 'extension-showcase',
-          auth: {
-            response_type: 'token'  // request a user token within the context
-          }
+          clientIdentifier: 'example-plugin',
         });
 
-        // Callback on fsm context response
-        shellSdk.on(SHELL_EVENTS.Version1.REQUIRE_CONTEXT, async (event) => {
-
-          console.log('REQUIRE_CONTEXT event:')
-          console.log(JSON.parse(event));
-
+        shellSdk.on(SHELL_EVENTS.Version1.REQUIRE_CONTEXT, (event) => {
           const {
-            // extract required context from event content
-            cloudHost,
             account,
             accountId,
             company,
             companyId,
             user,
-            extension,
-            // extract authentication data from event content
-            auth
+            userId,
+            selectedLocale,
           } = JSON.parse(event);
-
-          // Access_token has a short life stpan and needs to be refreshed before expiring
-          // Each extension need to implement its own strategy to refresh it.
-          initializeRefreshTokenStrategy(shellSdk, auth);
-
-          shellSdk.onViewState('activityID', async activityID => {
-              updateUI(`loading...`);
-              const activity = await getActivity(cloudHost, account, company, activityID);
-              console.log('Activity data: ' + activity);
-              updateUI(activity ? `${activity.id}` : `NO ACTIVITY ID`);
-          });
+          updateUI(`Hi ${user} / ${account} / ${company}!`);
         });
+      } catch (e) {
+        updateUI(`Exception: ${e.message}`);
       }
     </script>
   </body>

@@ -1,7 +1,7 @@
 {
   "name": "Activity Info Extension",
   "description": "This is a minimalistic extension that is supposed to show the activity id.",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "provider": "SAP",
   "outletPositions": ["PP_ASSIGNMENT_DETAILS_1", "PP_ASSIGNMENT_DETAILS_2"]
 }
