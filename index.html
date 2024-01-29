@@ -30,7 +30,7 @@
 
         // Initialise the extension by requesting the fsm context
         shellSdk.emit(SHELL_EVENTS.Version1.REQUIRE_CONTEXT, {
-          clientIdentifier: 'parameter-showcase',
+          clientIdentifier: 'extension-showcase',
           auth: {
             response_type: 'token'  // request a user token within the context
           }
@@ -59,12 +59,11 @@
           // Each extension need to implement its own strategy to refresh it.
           initializeRefreshTokenStrategy(shellSdk, auth);
 
-          console.log('Hello from the minimal extension!');
-
-          shellSdk.onViewState('activityId', async activityId => {
-              const activity = await getActivity(cloudHost, account, company, activityId);
-              //updateUI(activity ? '${activity.code}' : 'NO ACTIVITY CODE');
-              console.log('xxx' + activity + 'xxx');
+          shellSdk.onViewState('activityID', async activityID => {
+              updateUI(`loading...`);
+              const activity = await getActivity(cloudHost, account, company, activityID);
+              console.log('Activity data: ' + activity);
+              updateUI(activity ? `${activity.id}` : `NO ACTIVITY ID`);
           });
         });
       }

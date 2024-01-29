@@ -21,7 +21,7 @@ function initializeRefreshTokenStrategy(shellSdk, auth) {
 // 
 // Request context with activity ID to return the activities data
 //
-function getActivity(cloudHost, account, company, activityId) {
+function getActivity(cloudHost, account, company, activityID) {
   
   const headers = {
     'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ function getActivity(cloudHost, account, company, activityId) {
   return new Promise(resolve => {
 
     // Fetch Activity object
-    fetch(`https://${cloudHost}/api/data/v4/Activity/${activityId}?dtos=Activity.42&account=${account}&company=${company}`, {
+    fetch(`https://${cloudHost}/api/data/v4/Activity/${activityID}?dtos=Activity.42&account=${account}&company=${company}`, {
       headers
       })
       .then(response => response.json())
@@ -42,26 +42,3 @@ function getActivity(cloudHost, account, company, activityId) {
       });
   });
 }
-
-//          // Fetch all ServiceContractEquipment
-//          fetch(`https://${cloudHost}/api/data/v4/ServiceContractEquipment?dtos=ServiceContractEquipment.12&account=${account}&company=${company}`, {
-//            headers
-//            })
-//              .then(response => response.json())
-//              .then(function(json) {
-//
-//                const serviceContractEquipment = json.data.find(contract => contract.serviceContractEquipment.equipment === activity.equipment);
-//                if (!serviceContractEquipment) {
-//                  resolve(null);
-//                } else {
-//                  fetch(`https://${cloudHost}/api/data/v4/ServiceContract/${serviceContractEquipment.serviceContractEquipment.serviceContract}?dtos=ServiceContract.13&account=${account}&company=${company}`, {
-//                    headers
-//                    })
-//                      .then(response => response.json())
-//                      .then(function(json) {
-//                        resolve(json.data[0].serviceContract);
-//                      });
-//                }
-//
-//              });
-//
