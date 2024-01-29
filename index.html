@@ -21,6 +21,10 @@
       // see https://github.com/SAP/fsm-shell for more details.
       const { ShellSdk, SHELL_EVENTS } = FSMShell;
 
+      // print stuff on screen
+      const updateUI = (text) =>
+        (document.querySelectorAll('#info')[0].innerText = text);
+
       // Display an error message if extension does not run within shell
       if (!ShellSdk.isInsideShell()) {
         console.log('Unable to reach shell eventAPI');
