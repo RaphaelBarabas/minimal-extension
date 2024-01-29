@@ -45,11 +45,16 @@
           
           //updateUI(`${cloudHost} / ${user} / ${account} / ${company}!`);
 
-          initializeRefreshTokenStrategy(shellSdk, SHELL_EVENTS);
+          //initializeRefreshTokenStrategy(shellSdk, SHELL_EVENTS);
 
-          const activity = getActivity(cloudHost, account, company, '3F5BD90C305C4B70ABCD106F0C0357CA');
+          //const activity = getActivity(cloudHost, account, company, '3F5BD90C305C4B70ABCD106F0C0357CA');
 
-          updateUI(`Activity: ${activity.id}`);
+          shellSdk.onViewState('activityID', async activityID => {
+              console.log('Activity ID: ' + activityID);
+              updateUI(`Activity ID: ${activity.id}`);
+          });
+
+          //updateUI(`Activity: ${activity.id}`);
 
         });
       } catch (e) {
