@@ -47,7 +47,7 @@
 
           initializeRefreshTokenStrategy(shellSdk, SHELL_EVENTS);
 
-          const activity = getActivity(cloudHost, account, company, '3F5BD90C305C4B70ABCD106F0C0357CA')
+          const activity = await getActivity(cloudHost, account, company, '3F5BD90C305C4B70ABCD106F0C0357CA');
 
           updateUI(`Activity: ${activity.id}`);
 
