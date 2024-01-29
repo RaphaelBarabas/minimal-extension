@@ -10,7 +10,6 @@
       <h2 id="info">loading ...</h2>
     </div>
     <script src="https://unpkg.com/fsm-shell"></script>
-    <script src="helpers.js"></script>
     <script>
       const updateUI = (text) =>
         (document.querySelectorAll('#info')[0].innerText = text);
@@ -51,7 +50,7 @@
 
           shellSdk.onViewState('activityID', async activityID => {
               console.log('Activity ID: ' + activityID);
-              updateUI(`Activity ID: ${activity.id}`);
+              updateUI(`Activity ID: ${activityID}`);
           });
 
           //updateUI(`Activity: ${activity.id}`);
