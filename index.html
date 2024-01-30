@@ -5,7 +5,7 @@
     <title>Activity id</title>
   </head>
   <body>
-    <div>
+    <div class="mat-card-subtitle title-with-no-margin">
       <h1>Activity id</h1>
       <h2 id="info">loading ...</h2>
     </div>
@@ -16,7 +16,7 @@
 
       try {
         const { ShellSdk, SHELL_EVENTS } = FSMShell;
-        console.log('using ShellSdk version', ShellSdk.VERSION);
+        //console.log('using ShellSdk version', ShellSdk.VERSION);
 
         if (!ShellSdk.isInsideShell()) {
           throw new Error('unable to reach shell eventAPI');
@@ -42,18 +42,11 @@
             auth
           } = JSON.parse(event);
           
-          //updateUI(`${cloudHost} / ${user} / ${account} / ${company}!`);
-
           //initializeRefreshTokenStrategy(shellSdk, SHELL_EVENTS);
 
-          //const activity = getActivity(cloudHost, account, company, '3F5BD90C305C4B70ABCD106F0C0357CA');
-
           shellSdk.onViewState('activityID', async activityID => {
-              console.log('Activity ID: ' + activityID);
               updateUI(`Activity ID: ${activityID}`);
           });
-
-          //updateUI(`Activity: ${activity.id}`);
 
         });
       } catch (e) {
