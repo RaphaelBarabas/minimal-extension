@@ -8,7 +8,6 @@
         background-color: #f1f1f1;
         font-family: Roboto,Helvetica Neue,sans-serif;
         font-size: 8px!important;
-        font-style: normal;
         margin:0;
       }
       
@@ -39,7 +38,8 @@
 
         // get context
         shellSdk.emit(SHELL_EVENTS.Version1.REQUIRE_CONTEXT, {
-          clientIdentifier: 'example-plugin',
+          clientIdentifier: '00013fbf-extension-client',
+          clientSecret: '914adc89-25e7-438c-8e82-758171816fe2'
         });
 
         shellSdk.on(SHELL_EVENTS.Version1.REQUIRE_CONTEXT, (event) => {
@@ -57,8 +57,8 @@
           
           //initializeRefreshTokenStrategy(shellSdk, SHELL_EVENTS);
 
-          shellSdk.onViewState('selectedBusinessPartnerId', async selectedBusinessPartnerId => {
-              updateUI(`Activity ID: ${selectedBusinessPartnerId}`);
+          shellSdk.onViewState('activityID', async activityID => {
+              updateUI(`Activity ID: ${activityID}`);
           });
 
         });
