@@ -64,17 +64,7 @@ function getChecklistInstance(cloudHost, account, company, activityID) {
             .then(function(json) {
 
               const ChecklistInstance = json.data.find((element) => element.checklistInstance.object.objectId === activity.id);
-              if (!ChecklistInstance) {
-                resolve(null);
-              } else {
-                fetch(`https://${cloudHost}/api/data/v4/ChecklistInstance/${ChecklistInstance.id}?dtos=ChecklistInstance.20&account=${account}&company=${company}`, {
-                  headers
-                  })
-                    .then(response => response.json())
-                    .then(function(json) {
-                      resolve(json.data[0].checklist);
-                    });
-              }
+              resolve(ChecklistInstance ? ChecklistInstance : null);
             });
       });
   });
