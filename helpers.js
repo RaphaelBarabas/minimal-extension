@@ -13,6 +13,9 @@ function initializeRefreshTokenStrategy(shellSdk, SHELL_EVENTS) {
       response_type: 'token'  // request a user token within the context
     });
   }
+
+  sessionStorage.setItem('token', auth.access_token);
+  setTimeout(() => fetchToken(), (auth.expires_in * 1000) - 5000);
 }
 
 // 
@@ -30,12 +33,49 @@ function getActivity(cloudHost, account, company, activityID) {
   return new Promise(resolve => {
 
     // Fetch Activity object
-    fetch(`https://${cloudHost}/api/data/v4/Activity/${activityID}?dtos=Activity.42&account=${account}&company=${company}`, {
-      headers
-      })
+    fetch(`https://${cloudHost}/api/data/v4/Activity/${activityID}?dtos=Activity.42&account=${account}&company=${company}`, 
+      {headers})
       .then(response => response.json())
       .then(function(json) {
         resolve(json.data[0].activity);
+      });
+  });
+}
+
+function getChecklistInstance(cloudHost, account, company, activityID) {
+  
+  const headers = {
+    'Content-Type': 'application/json',
+    'X-Client-ID': 'fsm-extension-sample',
+    'X-Client-Version': '1.0.0',
+    'Authorization': `bearer ${sessionStorage.getItem('token')}`,
+  };
+
+  return new Promise(resolve => {
+
+    // Fetch Activity object
+    fetch(`https://${cloudHost}/api/data/v4/Activity/${activityID}?dtos=Activity.42&account=${account}&company=${company}`, {headers})
+      .then(response => response.json())
+      .then(function(json) {
+        const activity = json.data[0].activity;
+        // Fetch all ChecklistInstances
+        fetch(`https://${cloudHost}/api/data/v4/ChecklistInstance?dtos=ChecklistInstance.20&account=${account}&company=${company}`, {headers})
+            .then(response => response.json())
+            .then(function(json) {
+
+              const ChecklistInstance = json.data.find(checklist => checklist.object.objectId === activity.id);
+              if (!ChecklistInstance) {
+                resolve(null);
+              } else {
+                fetch(`https://${cloudHost}/api/data/v4/ChecklistInstance/${ChecklistInstance.id}?dtos=ChecklistInstance.20&account=${account}&company=${company}`, {
+                  headers
+                  })
+                    .then(response => response.json())
+                    .then(function(json) {
+                      resolve(json.data[0].checklist);
+                    });
+              }
+            });
       });
   });
 }

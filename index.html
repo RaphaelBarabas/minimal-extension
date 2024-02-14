@@ -59,6 +59,8 @@
 
           shellSdk.onViewState('activityID', async activityID => {
               updateUI(`Activity ID: ${activityID}`);
+              let checklistInstance = await getChecklistInstance(cloudHost, account, company, activityID);
+              updateUI(checklistInstance ? `${checklistInstance.id}` : `No Checklist`);
           });
 
         });
