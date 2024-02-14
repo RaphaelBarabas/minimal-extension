@@ -63,7 +63,7 @@ function getChecklistInstance(cloudHost, account, company, activityID) {
             .then(response => response.json())
             .then(function(json) {
 
-              const ChecklistInstance = json.data.find(checklist => checklist.object.objectId === activity.id);
+              const ChecklistInstance = json.data.find(checklist => checklist.objectId === activity.id);
               if (!ChecklistInstance) {
                 resolve(null);
               } else {
