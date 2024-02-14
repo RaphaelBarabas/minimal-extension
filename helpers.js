@@ -59,7 +59,7 @@ function getChecklistInstance(cloudHost, account, company, activityID) {
       .then(function(json) {
         const activity = json.data[0].activity;
         // Fetch all ChecklistInstances
-        fetch(`https://${cloudHost}/api/data/v4/ChecklistInstance?dtos=ChecklistInstance.20&account=${account}&company=${company}`, {headers})
+        fetch(`https://${cloudHost}/api/data/v4/ChecklistInstance?dtos=ChecklistInstance.20&account=${account}&company=${company}?query=object.objectId="${activityID}"`, {headers})
             .then(response => response.json())
             .then(function(json) {
 
