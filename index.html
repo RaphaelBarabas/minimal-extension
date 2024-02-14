@@ -22,6 +22,7 @@
       <h2 id="info">loading ...</h2>
     </div>
     <script src="https://unpkg.com/fsm-shell"></script>
+    <script src="helpers.js"></script>
     <script>
       const updateUI = (text) =>
         (document.querySelectorAll('#info')[0].innerText = text);
@@ -55,7 +56,7 @@
             auth
           } = JSON.parse(event);
           
-          //initializeRefreshTokenStrategy(shellSdk, SHELL_EVENTS);
+          initializeRefreshTokenStrategy(shellSdk, SHELL_EVENTS);
 
           shellSdk.onViewState('activityID', async activityID => {
               updateUI(`Activity ID: ${activityID}`);
