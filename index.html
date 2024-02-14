@@ -56,7 +56,7 @@
             auth
           } = JSON.parse(event);
           
-          initializeRefreshTokenStrategy(shellSdk, SHELL_EVENTS);
+          initializeRefreshTokenStrategy(shellSdk, SHELL_EVENTS, auth);
 
           shellSdk.onViewState('activityID', async activityID => {
               updateUI(`Activity ID: ${activityID}`);
