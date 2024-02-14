@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Activity id</title>
+    <title>ChecklistInstance id</title>
     <style>
       body {
         background-color: #f1f1f1;
@@ -62,9 +62,10 @@
           initializeRefreshTokenStrategy(shellSdk, SHELL_EVENTS, auth);
 
           shellSdk.onViewState('activityID', async activityID => {
-              updateUI(`Activity ID: ${activityID}`);
-              let checklistInstance = await getChecklistInstance(cloudHost, account, company, activityID);
-              updateUI(checklistInstance ? `${checklistInstance.id}` : `No Checklist`);
+              updateUI(`Loading...`);
+              const checklistInstance = await getChecklistInstance(cloudHost, account, company, activityID);
+              const text = `Id: ${checklistInstance.id}<br>Closed: ${checklistInstance.closed}<br>dataVersion: ${checklistInstance.dataVersion}<br>Template: ${checklistInstance.template}`
+              updateUI(checklistInstance ? text : `No Checklist`);
           });
 
         });
