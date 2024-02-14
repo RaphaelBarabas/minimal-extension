@@ -58,8 +58,7 @@ function getChecklistInstance(cloudHost, account, company, activityID) {
       {headers})
       .then(response => response.json())
       .then(function(json) {
-        const ChecklistInstance = json.data.find((element) => element.checklistInstance.object.objectId === activityID); // Why am I doing this
-        resolve(ChecklistInstance == undefined ? ChecklistInstance : null);
+        resolve(json.data[0].checklistInstance);
       });
   });
 }
