@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>ChecklistInstance id</title>
+    <title>ChecklistInstance info</title>
     <style>
       body {
         background-color: #f1f1f1;
@@ -18,7 +18,7 @@
   </head>
   <body>
     <div>
-      <h1>Activity id</h1>
+      <h1>ChecklistInstance info</h1>
       <h2 id="info">loading ...</h2>
     </div>
     <script src="https://unpkg.com/fsm-shell"></script>
@@ -62,7 +62,6 @@
           initializeRefreshTokenStrategy(shellSdk, SHELL_EVENTS, auth);
 
           shellSdk.onViewState('activityID', async activityID => {
-              updateUI(`Loading...`);
               const checklistInstance = await getChecklistInstance(cloudHost, account, company, activityID);
               const text = `Id: ${checklistInstance.id}\nClosed: ${checklistInstance.closed}\ndataVersion: ${checklistInstance.dataVersion}\nTemplate: ${checklistInstance.template}`
               updateUI(checklistInstance ? text : `No Checklist`);
