@@ -1,7 +1,7 @@
 //
 // Loop before a token expire to fetch a new one
 //
-function initializeRefreshTokenStrategy(shellSdk, SHELL_EVENTS) {
+function initializeRefreshTokenStrategy(shellSdk, auth) {
 
   shellSdk.on(SHELL_EVENTS.Version1.REQUIRE_AUTHENTICATION, (event) => {
     sessionStorage.setItem('token', event.access_token);
