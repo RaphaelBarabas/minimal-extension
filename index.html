@@ -40,7 +40,10 @@
         // get context
         shellSdk.emit(SHELL_EVENTS.Version1.REQUIRE_CONTEXT, {
           clientIdentifier: '00013fbf-extension-client',
-          clientSecret: '914adc89-25e7-438c-8e82-758171816fe2'
+          clientSecret: '914adc89-25e7-438c-8e82-758171816fe2',
+          auth: {
+            response_type: 'token' // request a user token within the context
+          }
         });
 
         shellSdk.on(SHELL_EVENTS.Version1.REQUIRE_CONTEXT, (event) => {
