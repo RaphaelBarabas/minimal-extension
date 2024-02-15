@@ -63,7 +63,7 @@
 
           shellSdk.onViewState('activityID', async activityID => {
               const checklistInstances = await getChecklistInstance(cloudHost, account, company, activityID);
-              const text = "";
+              let text = "";
               checklistInstances.forEach( (cl) => {
                 text += `Id: ${cl.id}\nClosed: ${cl.closed}\ndataVersion: ${cl.dataVersion}\nTemplate: ${cl.template}\n\n`
               });
