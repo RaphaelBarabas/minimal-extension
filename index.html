@@ -64,8 +64,8 @@
           shellSdk.onViewState('activityID', async activityID => {
               const checklistInstances = await getChecklistInstance(cloudHost, account, company, activityID);
               let text = "";
-              checklistInstances.forEach( (cl) => {
-                text += `Id: ${cl.id}\nClosed: ${cl.closed}\ndataVersion: ${cl.dataVersion}\nTemplate: ${cl.template}\n\n`
+              checklistInstances.forEach( cl => {
+                text += `Id: ${cl.checklistInstance.id}\nClosed: ${cl.closed}\ndataVersion: ${cl.dataVersion}\nTemplate: ${cl.template}\n\n`
               });
               updateUI(checklistInstances ? text : `No Checklist`);
               // TODO insert link
