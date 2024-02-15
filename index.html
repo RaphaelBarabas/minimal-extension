@@ -65,7 +65,10 @@
               const checklistInstances = await getChecklistInstance(cloudHost, account, company, activityID);
               let text = "";
               checklistInstances.forEach( cl => {
-                text += `Id: ${cl.checklistInstance.id}\nClosed: ${cl.checklistInstance.closed}\ndataVersion: ${cl.checklistInstance.dataVersion}\nTemplate: ${cl.checklistInstance.template}\n\n`
+                text += `Id: ${cl.checklistInstance.id}\n
+                         Closed: ${cl.checklistInstance.closed}\n
+                         dataVersion: ${cl.checklistInstance.dataVersion}\n
+                         Template: ${cl.checklistInstance.template}\n\n`
               });
               updateUI(checklistInstances ? text : `No Checklist`);
               // TODO insert link
