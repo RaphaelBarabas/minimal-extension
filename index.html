@@ -65,15 +65,9 @@
 
           shellSdk.onViewState('activityID', async activityID => {
               const checklistInstances = await getChecklistInstance(cloudHost, account, company, activityID);
-              let text = "";
               checklistInstances.forEach( cl => {
-                text += `Id: ${cl.checklistInstance.id}\n\
-                         Closed: ${cl.checklistInstance.closed}\n\
-                         dataVersion: ${cl.checklistInstance.dataVersion}\n\
-                         Template: ${cl.checklistInstance.template}\n\n`;
-                addURLtoUI(`<a href="https://${cloudHost}/shell/#/smart-forms-and-feedback/checklist-data-collector/checklist-instance/${cl.checklistInstance.id}">Link</a>`);
+                addURLtoUI(`<a href="https://${cloudHost}/shell/#/smart-forms-and-feedback/checklist-data-collector/checklist-instance/${cl.checklistInstance.id}" target="_blank">${cl.checklistInstance.id} v${cl.checklistInstance.dataVersion}</a>\n`);
               });
-              //updateUI(checklistInstances ? text : `No Checklist`);
           });
 
         });
