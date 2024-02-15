@@ -65,9 +65,9 @@
               const checklistInstances = await getChecklistInstance(cloudHost, account, company, activityID);
               let text = "";
               checklistInstances.forEach( cl => {
-                text += `Id: ${cl.checklistInstance.id}\n
-                         Closed: ${cl.checklistInstance.closed}\n
-                         dataVersion: ${cl.checklistInstance.dataVersion}\n
+                text += `Id: ${cl.checklistInstance.id}\
+                         Closed: ${cl.checklistInstance.closed}\
+                         dataVersion: ${cl.checklistInstance.dataVersion}\
                          Template: ${cl.checklistInstance.template}\n\n`
               });
               updateUI(checklistInstances ? text : `No Checklist`);
