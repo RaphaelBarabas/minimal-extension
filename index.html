@@ -68,11 +68,12 @@
                 text += `Id: ${cl.checklistInstance.id}\n\
                          Closed: ${cl.checklistInstance.closed}\n\
                          dataVersion: ${cl.checklistInstance.dataVersion}\n\
-                         Template: ${cl.checklistInstance.template}\n\n`
+                         Template: ${cl.checklistInstance.template}\n\
+                         Link: https://${cloudHost}/shell/#/smart-forms-and-feedback/checklist-data-collector/checklist-instance/${cl.checklistInstance.id}\n\n`
               });
               updateUI(checklistInstances ? text : `No Checklist`);
               // TODO insert link
-              // https://eu.fsm.cloud.sap/shell/#/smart-forms-and-feedback/checklist-data-collector/checklist-instance/738D0FB99A7046CB9F771CCC22FDD8B9
+              // https://${cloudHost}/shell/#/smart-forms-and-feedback/checklist-data-collector/checklist-instance/${cl.checklistInstance.id}
           });
 
         });
