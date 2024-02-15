@@ -70,10 +70,10 @@
                 text += `Id: ${cl.checklistInstance.id}\n\
                          Closed: ${cl.checklistInstance.closed}\n\
                          dataVersion: ${cl.checklistInstance.dataVersion}\n\
-                         Template: ${cl.checklistInstance.template}\n\n`
+                         Template: ${cl.checklistInstance.template}\n\n`;
+                addURLtoUI(`<a href="https://${cloudHost}/shell/#/smart-forms-and-feedback/checklist-data-collector/checklist-instance/${cl.checklistInstance.id}">Link</a>`);
               });
-              updateUI(checklistInstances ? text : `No Checklist`);
-              addURLtoUI(`<a href="https://${cloudHost}/shell/#/smart-forms-and-feedback/checklist-data-collector/checklist-instance/${cl.checklistInstance.id}">Link</a>`);
+              //updateUI(checklistInstances ? text : `No Checklist`);
           });
 
         });
