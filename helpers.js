@@ -58,7 +58,8 @@ function getChecklistInstance(cloudHost, account, company, activityID) {
       {headers})
       .then(response => response.json())
       .then(function(json) {
-        resolve(json.data[0].checklistInstance);
+        resolve(json.data);
+        //resolve(json.data[0].checklistInstance);
       });
   });
 }

@@ -62,9 +62,12 @@
           initializeRefreshTokenStrategy(shellSdk, SHELL_EVENTS, auth);
 
           shellSdk.onViewState('activityID', async activityID => {
-              const checklistInstance = await getChecklistInstance(cloudHost, account, company, activityID);
-              const text = `Id: ${checklistInstance.id}\nClosed: ${checklistInstance.closed}\ndataVersion: ${checklistInstance.dataVersion}\nTemplate: ${checklistInstance.template}`
-              updateUI(checklistInstance ? text : `No Checklist`);
+              const checklistInstances = await getChecklistInstance(cloudHost, account, company, activityID);
+              const text = "";
+              checklistInstances.forEach( (checklist) => {
+                text += `Id: ${checklistInstance.id}\nClosed: ${checklistInstance.closed}\ndataVersion: ${checklistInstance.dataVersion}\nTemplate: ${checklistInstance.template}\n\n`
+              });
+              updateUI(checklistInstances ? text : `No Checklist`);
               // TODO insert link
               // https://eu.fsm.cloud.sap/shell/#/smart-forms-and-feedback/checklist-data-collector/checklist-instance/738D0FB99A7046CB9F771CCC22FDD8B9
           });
