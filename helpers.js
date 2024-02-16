@@ -70,14 +70,14 @@ function getChecklistInstance(cloudHost, account, company, activityID) {
     FROM ChecklistInstance checklistInstance
     JOIN ChecklistTemplate checklistTemplate
       ON checklistTemplate.id=checklistInstance.template
-    WHERE checklistInstance.object.objectId=${activityID}`;
+    WHERE checklistInstance.object.objectId='${activityID}'`;
   
   // Data Transfer Object versions we use
   const dtos = 'ChecklistInstance.20;ChecklistTemplate.20';
 
   return new Promise(resolve => {
     // Fetch data from webservice and return it
-    fetch(`https://${cloudHost}/api/query/v1?dtos=${dtos}&account=${account}&company=${company}&query="${clQuery}"`, 
+    fetch(`https://${cloudHost}/api/query/v1?dtos=${dtos}&account=${account}&company=${company}&query=${clQuery}`, 
       {headers})
       .then(response => response.json())
       .then(function(json) {
