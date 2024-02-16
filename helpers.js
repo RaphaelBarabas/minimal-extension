@@ -48,6 +48,7 @@ function getChecklistInstance(cloudHost, account, company, activityID) {
     'Content-Type': 'application/json',
     'X-Client-ID': 'fsm-extension-sample',
     'X-Client-Version': '1.0.0',
+    'Cache-Control': 'no-cache',
     'Authorization': `bearer ${sessionStorage.getItem('token')}`,
   };
 
@@ -76,7 +77,7 @@ function getChecklistInstance(cloudHost, account, company, activityID) {
   const dtos = 'ChecklistInstance.20;ChecklistTemplate.20';
 
   return new Promise(resolve => {
-    // Fetch related ChecklistInstance objects
+    // Fetch data from webservice and return it
     fetch(`https://${cloudHost}/api/query/v1?dtos=${dtos}&account=${account}&company=${company}&query="${clQuery}"`, 
       {headers})
       .then(response => response.json())
