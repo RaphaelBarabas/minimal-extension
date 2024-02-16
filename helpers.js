@@ -52,25 +52,25 @@ function getChecklistInstance(cloudHost, account, company, activityID) {
   };
 
   // We want to query for all checklists on that actvity and join in the template name
-  const clQuery = `SELECT checklistInstance.id,\
-       checklistInstance.dataVersion,\
-       checklistInstance.version,\
-       checklistInstance.closed,\
-	     checklistInstance.language,\
-	     checklistInstance.lastChanged,\
-	     checklistInstance.createPerson,\
-	     checklistInstance.createDateTime,\
-	     checklistInstance.responsiblePerson,\
-	     checklistInstance.description,\
-		   checklistTemplate.name,\
-			 checklistTemplate.description,\
-			 checklistTemplate.version,\
-			 checklistTemplate.status,\
-			 checklistTemplate.defaultLanguage \
-    FROM ChecklistInstance checklistInstance \
-    JOIN ChecklistTemplate checklistTemplate \
-      ON checklistTemplate.id=checklistInstance.template \
-    WHERE checklistInstance.object.objectId="${activityID}";`;
+  const clQuery = `SELECT checklistInstance.id,
+       checklistInstance.dataVersion,
+       checklistInstance.version,
+       checklistInstance.closed,
+	     checklistInstance.language,
+	     checklistInstance.lastChanged,
+	     checklistInstance.createPerson,
+	     checklistInstance.createDateTime,
+	     checklistInstance.responsiblePerson,
+	     checklistInstance.description,
+		   checklistTemplate.name,
+			 checklistTemplate.description,
+			 checklistTemplate.version,
+			 checklistTemplate.status,
+			 checklistTemplate.defaultLanguage
+    FROM ChecklistInstance checklistInstance
+    JOIN ChecklistTemplate checklistTemplate
+      ON checklistTemplate.id=checklistInstance.template
+    WHERE checklistInstance.object.objectId=${activityID}`;
   
   // Data Transfer Object versions we use
   const dtos = 'ChecklistInstance.20;ChecklistTemplate.20';
