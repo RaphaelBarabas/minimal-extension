@@ -19,7 +19,7 @@
   <body>
     <div>
       <h1>Smartforms</h1>
-      <h2 id="info">loading ...</h2>
+      <p id="info">loading ...</p>
     </div>
     <script src="https://unpkg.com/fsm-shell"></script>
     <script src="helpers.js"></script>
@@ -67,7 +67,7 @@
               const checklistInstances = await getChecklistInstance(cloudHost, account, company, activityID);
               updateUI("");
               checklistInstances.forEach( cl => {
-                addURLtoUI(`<a href="https://${cloudHost}/shell/#/smart-forms-and-feedback/checklist-data-collector/checklist-instance/${cl.checklistInstance.id}" target="_blank">${cl.checklistTemplate.name} v${cl.checklistInstance.version}</a>\n`);
+                addURLtoUI(`<p><a href="https://${cloudHost}/shell/#/smart-forms-and-feedback/checklist-data-collector/checklist-instance/${cl.checklistInstance.id}" target="_blank">${cl.checklistTemplate.name} v${cl.checklistInstance.version}</a></p>`);
               });
           });
 
