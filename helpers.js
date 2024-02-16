@@ -48,7 +48,6 @@ function getChecklistInstance(cloudHost, account, company, activityID) {
     'Content-Type': 'application/json',
     'X-Client-ID': 'fsm-extension-sample',
     'X-Client-Version': '1.0.0',
-    'Cache-Control': 'no-cache',
     'Authorization': `bearer ${sessionStorage.getItem('token')}`,
   };
 
