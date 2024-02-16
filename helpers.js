@@ -51,6 +51,7 @@ function getChecklistInstance(cloudHost, account, company, activityID) {
     'Authorization': `bearer ${sessionStorage.getItem('token')}`,
   };
 
+  // We want to query for all checklists on that actvity and join in the template name
   const clQuery = `SELECT checklistInstance.id,\
        checklistInstance.dataVersion,\
        checklistInstance.version,\
@@ -71,9 +72,12 @@ function getChecklistInstance(cloudHost, account, company, activityID) {
       ON checklistTemplate.id=checklistInstance.template \
     WHERE checklistInstance.object.objectId="${activityID}";`;
   
+  // Data Transfer Object versions we use
+  const dtos = 'ChecklistInstance.20;ChecklistTemplate.20';
+
   return new Promise(resolve => {
     // Fetch related ChecklistInstance objects
-    fetch(`https://${cloudHost}/api/query/v1?dtos=ChecklistInstance.20;ChecklistTemplate:20&account=${account}&company=${company}&query="${clQuery}"`, 
+    fetch(`https://${cloudHost}/api/query/v1?dtos=${dtos}&account=${account}&company=${company}&query="${clQuery}"`, 
       {headers})
       .then(response => response.json())
       .then(function(json) {
