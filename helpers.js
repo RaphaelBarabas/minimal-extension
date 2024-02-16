@@ -51,43 +51,30 @@ function getChecklistInstance(cloudHost, account, company, activityID) {
     'Authorization': `bearer ${sessionStorage.getItem('token')}`,
   };
 
-  const clQuery = `SELECT checklistInstance.id, 
-       checklistInstance.dataVersion,
-       checklistInstance.version,
-       checklistInstance.closed,
-	     checklistInstance.language,
-	     checklistInstance.lastChanged,
-	     checklistInstance.createPerson,
-	     checklistInstance.createDateTime,
-	     checklistInstance.responsiblePerson,
-	     checklistInstance.description,
-		   checklistTemplate.name,
-			 checklistTemplate.description,
-			 checklistTemplate.version,
-			 checklistTemplate.status,
-			 checklistTemplate.defaultLanguage
-    FROM ChecklistInstance checklistInstance
-    JOIN ChecklistTemplate checklistTemplate
-      ON checklistTemplate.id=checklistInstance.template 
+  const clQuery = `SELECT checklistInstance.id,\
+       checklistInstance.dataVersion,\
+       checklistInstance.version,\
+       checklistInstance.closed,\
+	     checklistInstance.language,\
+	     checklistInstance.lastChanged,\
+	     checklistInstance.createPerson,\
+	     checklistInstance.createDateTime,\
+	     checklistInstance.responsiblePerson,\
+	     checklistInstance.description,\
+		   checklistTemplate.name,\
+			 checklistTemplate.description,\
+			 checklistTemplate.version,\
+			 checklistTemplate.status,\
+			 checklistTemplate.defaultLanguage \
+    FROM ChecklistInstance checklistInstance \
+    JOIN ChecklistTemplate checklistTemplate \
+      ON checklistTemplate.id=checklistInstance.template \
     WHERE checklistInstance.object.objectId="${activityID}";`;
   
-    const body = {
-      query: clQuery,
-      account: account,
-      company: company,
-      clientIdentifier: 'CustomSapFsmCrowdExtension',
-      dtos: 'ChecklistInstance:20;ChecklistTemplate:20'
-    };
-
   return new Promise(resolve => {
-
     // Fetch related ChecklistInstance objects
-    fetch(`https://${cloudHost}/api/query/v1`, 
-      {
-        method: 'GET',
-        headers: headers,
-        body: JSON.stringify(body)
-      })
+    fetch(`https://${cloudHost}/api/query/v1?dtos=ChecklistInstance.20;ChecklistTemplate:20&account=${account}&company=${company}&query="${clQuery}"`, 
+      {headers})
       .then(response => response.json())
       .then(function(json) {
         resolve(json.data);
