@@ -67,7 +67,7 @@
               const checklistInstances = await getChecklistInstance(cloudHost, account, company, activityID);
               updateUI("");
               checklistInstances.forEach( cl => {
-                addURLtoUI(`<a href="https://${cloudHost}/shell/#/smart-forms-and-feedback/checklist-data-collector/checklist-instance/${cl.checklistInstance.id}" target="_blank">${cl.checklistInstance.id} v${cl.checklistInstance.dataVersion}</a>\n`);
+                addURLtoUI(`<a href="https://${cloudHost}/shell/#/smart-forms-and-feedback/checklist-data-collector/checklist-instance/${cl.checklistInstance.id}" target="_blank">${cl.checklistTemplate.name} v${cl.checklistInstance.version}</a>\n`);
               });
           });
 
