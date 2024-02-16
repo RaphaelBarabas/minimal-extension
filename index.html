@@ -17,9 +17,9 @@
       </style>
   </head>
   <body>
-    <div class="assignment-fields-column assignment-read-only-field">
+    <div>
       <h1>Smartforms</h1>
-      <p id="info" class="ng-star-inserted">loading ...</p>
+      <p id="info">loading ...</p>
     </div>
     <script src="https://unpkg.com/fsm-shell"></script>
     <script src="helpers.js"></script>
@@ -39,10 +39,10 @@
 
         const shellSdk = ShellSdk.init(parent, '*');
 
-        // get context
+        // Change the Client ID and Secret here to reflect an existing one in your FSM account
         shellSdk.emit(SHELL_EVENTS.Version1.REQUIRE_CONTEXT, {
           clientIdentifier: '00013fbf-extension-client',
-          clientSecret: '914adc89-25e7-438c-8e82-758171816fe2',
+          //clientSecret: '914adc89-25e7-438c-8e82-758171816fe2',
           auth: {
             response_type: 'token' // request a user token within the context
           }
