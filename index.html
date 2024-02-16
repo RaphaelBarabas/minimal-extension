@@ -39,7 +39,7 @@
 
         const shellSdk = ShellSdk.init(parent, '*');
 
-        // Change the Client ID and Secret here to reflect an existing one in your FSM account
+        // get context
         shellSdk.emit(SHELL_EVENTS.Version1.REQUIRE_CONTEXT, {
           auth: {
             response_type: 'token' // request a user token within the context
